@@ -7,15 +7,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 
+// Actualizacion de rutas hijas.
+/*
+  Cuando se quiera acceder a alguna de las rutas aqui
+  definidas, se debera acceder mediante la ruta padre
+  definida en path seguido de su ruta children correspondiente.
+  dashboard/progress
+*/
 const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     component: PagesComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: '', component: DashboardComponent },
       { path: 'progress', component: ProgressComponent },
       { path: 'grafica1', component: Grafica1Component },
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ]
   }
 ]
