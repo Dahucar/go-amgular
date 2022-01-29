@@ -1,0 +1,35 @@
+<button (click)="deleteHero()">Eliminar heroe</button>
+<button (click)="returnDeletedHero()">Devolver heroe</button>
+
+<div *ngIf="listado.length !== 0; else emptyMessage">
+    <h2>Heroes</h2>
+    <div style="border: solid 1px green;">
+        <ul *ngFor="let herore of listado">
+            <li>{{ herore }}</li>
+        </ul>
+    </div>
+</div>
+
+
+<div *ngIf="heroesBorrados.length !== 0; else emptyMessage">
+    <h2>Heroes borrados</h2>
+    <div style="border: solid 1px red;">
+        <ul *ngFor="let herore of heroesBorrados">
+            <li>{{ herore }}</li>
+        </ul>
+    </div>
+</div>
+
+<ng-template #emptyMessage>
+    <div style="
+        background-color: red; 
+        border-radius: 4%; 
+        text-align: center;
+        width: 300px;
+        color: white;
+        padding: 3px 0px;
+        font-weight: bold;
+    ">
+        <p>No hay elementos para mostrar</p>
+    </div>
+</ng-template>
