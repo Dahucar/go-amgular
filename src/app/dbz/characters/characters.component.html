@@ -1,0 +1,17 @@
+<div *ngIf="characterList.length !== 0; else noPersonajes" class="row">
+    <div class="col" *ngFor="let character of characterList">
+        <div class="card" (click)="selectHero(character)">
+            <div class="card-body">
+                <h2>{{ character.name }}</h2>
+                <p>Poder: {{ character.power | number }} Unidades</p>
+                <p>{{ character.isActive }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noPersonajes>
+    <div class="alert alert-info">
+        no hay personasjes
+    </div>
+</ng-template>

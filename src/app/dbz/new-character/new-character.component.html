@@ -1,0 +1,10 @@
+<div *ngIf="onError" class="alert alert-danger">
+    Valores no permitidos.
+</div>
+
+<p *ngIf="counterPower !== 0">Todal de poderes: {{ counterPower }}</p>
+<form (ngSubmit)="addNew()" class="form" autocomplete="off">
+    <input type="text" name="dbz-name" id="dbz-name" placeholder="name" [(ngModel)]="character.name"/>
+    <input type="number" name="dbz-power" id="dbz-power" placeholder="power" [(ngModel)]="character.power"/>
+    <button type="submit">Añadir</button>
+</form>
