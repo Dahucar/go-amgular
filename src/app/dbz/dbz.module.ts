@@ -7,6 +7,8 @@ import { MainDbzComponent } from './main-dbz/main-dbz.component';
 import { CharacterComponent } from './character/character.component';
 import { CharactersComponent } from './characters/characters.component';
 import { NewCharacterComponent } from './new-character/new-character.component';
+// Services.
+import { DbzService } from './services/dbz.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,9 @@ import { NewCharacterComponent } from './new-character/new-character.component';
   ],
   exports: [
     MainDbzComponent
+  ],
+  providers: [
+    DbzService
   ]
 })
 export class DbzModule { }

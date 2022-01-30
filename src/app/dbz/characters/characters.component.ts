@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Character } from 'src/app/models/character';
+import { DbzService } from '../services/dbz.service';
 
 @Component({
   selector: 'app-characters',
@@ -7,10 +8,17 @@ import { Character } from 'src/app/models/character';
 })
 export class CharactersComponent implements OnInit {
   public counterPower: number = 0;
-  @Input('data') characterList: Character[] = [];
-  constructor() { }
+  // @Input('data') characterList: Character[] = [];
+
+  constructor(
+    private _dbzService: DbzService
+  ) {}
 
   ngOnInit(): void {
+  }
+
+  get characterList() {
+    return this._dbzService.characters;
   }
 
   public removeLast(): void {
