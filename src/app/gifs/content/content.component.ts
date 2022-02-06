@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GifsService } from '../../services/gifs.service';
 
 @Component({
   selector: 'app-content',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private gifService: GifsService) { }
 
   ngOnInit(): void {
   }

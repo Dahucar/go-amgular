@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 export interface tag {
   id: number,
@@ -8,12 +10,19 @@ export interface tag {
 @Injectable({ providedIn: 'root' })
 export class GifsService {
   private tagsSearch: tag[] = [];
+  private gifsList: string[] = [];
+
   private MAX_LENGTH: number = 10;
   constructor(
+    private http: HttpClient
   ) { }
 
   get tagsSearchws(): tag[] {
     return [ ...this.tagsSearch ];
+  }
+
+  public getGifs(tag: string){
+    this.http.get(`${environment.API_GIFS_URL}&q=${tag}&limit=${this.MAX_LENGTH}`).subscribe((response: any) => console.log(response.data));
   }
 
   public addNewSearchTag(tag: string): void {
@@ -23,6 +32,8 @@ export class GifsService {
         name: tag,
         id: new Date().getTime()
       });
+
+      this.getGifs(tag);
     }
   }
 

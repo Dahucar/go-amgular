@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_KEY: "7SM7LI6h68pVODcz8pBQ5PvENBhhRHoX"
+  API_GIFS_URL : "https://api.giphy.com/v1/gifs/search?api_key=7SM7LI6h68pVODcz8pBQ5PvENBhhRHoX"
 };
 
 /*
