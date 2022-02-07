@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 export interface tag {
   id: number,
@@ -19,6 +20,10 @@ export class GifsService {
 
   get tagsSearchws(): tag[] {
     return [ ...this.tagsSearch ];
+  }
+
+  public getGifByTag(tag: string): Observable<any>{
+    return this.http.get(`${environment.API_GIFS_URL}&q=${tag}&limit=${this.MAX_LENGTH}`);
   }
 
   public getGifs(tag: string){

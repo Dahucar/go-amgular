@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { AddGif } from './gif.action';
+import { GifsService } from '../../services/gifs.service';
 
 // Definir el tipo de mi estado (las propiedades y su tipado correspondiente)
 export interface GifsInterface {
@@ -25,11 +26,23 @@ const defaultState: STATE_TYPE = {
 export class GifState {
 
   // Puede tener inyección de dependencias
+  constructor(
+    private gifService: GifsService
+  ){}
 
   // Definir todas las acciones necesarias.
   @Action(AddGif)
-  addNewGif(ctx: StateContext<STATE_TYPE>, action: AddGif) {
+  public addNewGif(ctx: StateContext<STATE_TYPE>, action: AddGif) {
     const state = ctx.getState();
+
+
+    // Llamar al servicio.
+    this.gifService
+      .getGifByTag(action.name)
+      .subscribe(response => {
+        
+      });
+
     ctx.setState({
       ...state,
       gifs: [ ...state.gifs, { url: action.name } ]

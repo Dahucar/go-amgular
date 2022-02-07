@@ -32,8 +32,8 @@ export class SearchComponent implements OnInit {
   public findGifByTag(){
     let tag = this.inputSearch.nativeElement.value;
     if (tag) {
-      // this.gifService.addNewSearchTag(tag);
-      this.store.dispatch([new AddGif(tag)]).subscribe(() => console.log("Se termina el dispatch"));
+      this.gifService.addNewSearchTag(tag);
+      this.store.dispatch([new AddGif(tag)]);
       this.inputSearch.nativeElement.value = "";
     }
   }
