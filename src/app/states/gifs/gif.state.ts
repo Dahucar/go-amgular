@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
-import { AddGif } from './gif.action';
+import { AddGif, AddTag, RemoveTagById } from './gif.action';
 import { GifsService } from '../../services/gifs.service';
 
 // Definir el tipo de mi estado (las propiedades y su tipado correspondiente)
@@ -8,13 +8,20 @@ export interface GifsInterface {
   url: string
 }
 
+export interface Tag {
+  id: number,
+  name: string,
+}
+
 export interface STATE_TYPE {
   gifs: GifsInterface[],
+  tags: Tag[],
   loading: boolean
 }
 
 const defaultState: STATE_TYPE = {
   gifs: [],
+  tags: [],
   loading: true,
 }
 
@@ -31,22 +38,19 @@ export class GifState {
   ){}
 
   // Definir todas las acciones necesarias.
-  @Action(AddGif)
-  public addNewGif(ctx: StateContext<STATE_TYPE>, action: AddGif) {
+  @Action(AddTag)
+  public addNewTag(ctx: StateContext<STATE_TYPE>, action: AddGif): void {
     const state = ctx.getState();
+    let tag: Tag = { id: new Date().getTime(), name: action.name };
+    ctx.setState({ ...state, tags: [ ...state.tags, tag ] });
+  }
 
-
-    // Llamar al servicio.
-    this.gifService
-      .getGifByTag(action.name)
-      .subscribe(response => {
-        
-      });
-
-    ctx.setState({
-      ...state,
-      gifs: [ ...state.gifs, { url: action.name } ]
-    });
+  @Action(RemoveTagById)
+  public removeTagById(ctx: StateContext<STATE_TYPE>, action: RemoveTagById): void {
+    const state = ctx.getState();
+    // buscar el tag por el id y devolver una lista actualizada
+    const tagsFitered = state.tags.filter(tag => tag.id !== action.id);
+    ctx.setState({ ...state, tags: tagsFitered });
   }
 
 }
