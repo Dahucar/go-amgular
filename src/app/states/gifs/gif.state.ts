@@ -42,7 +42,11 @@ export class GifState {
   public addNewTag(ctx: StateContext<STATE_TYPE>, action: AddGif): void {
     const state = ctx.getState();
     let tag: Tag = { id: new Date().getTime(), name: action.name };
-    ctx.setState({ ...state, tags: [ ...state.tags, tag ] });
+
+    if (this.inRangeTags(state.tags) && !this.isDuplicateTag(tag.name, state.tags)) {
+      ctx.setState({ ...state, tags: [ ...state.tags, tag ] });
+    }
+
   }
 
   @Action(RemoveTagById)
@@ -51,6 +55,19 @@ export class GifState {
     // buscar el tag por el id y devolver una lista actualizada
     const tagsFitered = state.tags.filter(tag => tag.id !== action.id);
     ctx.setState({ ...state, tags: tagsFitered });
+  }
+
+  private isDuplicateTag(name: string, tags: Tag[]): boolean{
+    console.log("execute isDuplicateTag!");
+    const isExist = tags.find(
+      tag => tag.name.toLowerCase() === name.toLowerCase()
+    );
+    return (isExist) ? true : false;
+  }
+
+  private inRangeTags(tags: Tag[]){
+    console.log("execute inRangeTags!");
+    return tags.length < 10;
   }
 
 }
