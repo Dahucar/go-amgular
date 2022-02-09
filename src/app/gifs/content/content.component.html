@@ -1,7 +1,9 @@
-<div class="row p-3">
-    <div class="col">
-        asdasdjaskdjahskdhaskjhdsakjhdkajshdkajshdkasjhdkasjhkdsaalskdjlask
-        asdasdjaskdjahskdhaskjhdsakjhdkajshdkajshdkasjhdkasjhkdsaalskdjlask
-        asdasdjaskdjahskdhaskjhdsakjhdkajshdkajshdkasjhdkasjhkdsaalskdjlask
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="col" *ngFor="let gif of gifs">
+        <div class="card shadow-sm">
+            <div class="bd-placeholder-img card-img-topy">
+                <img src="{{ gif.original['url'] }}" alt="">
+            </div>
+        </div>
     </div>
 </div>

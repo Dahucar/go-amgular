@@ -11,13 +11,13 @@ export interface Tag {
 }
 
 export interface STATE_TYPE {
-  gifs: Images[],
+  gifsList: Images[],
   tags: Tag[],
   loading: boolean
 }
 
 const defaultState: STATE_TYPE = {
-  gifs: [],
+  gifsList: [],
   tags: [],
   loading: true,
 }
@@ -62,15 +62,12 @@ export class GifState {
 
   @Action(GetGifsByTag)
   public getGifsByTag(ctx: StateContext<STATE_TYPE>, action: GetGifsByTag){
-    const state = ctx.getState();
+    const callService = () => this.gifService.getGifByTag(action.tag);
+    return callService().subscribe((response: GIFData) => {
+      const gifsList = response.data.map(g => g.images);
+      ctx.setState({ ...ctx.getState(), gifsList })
+    });
 
-    this.gifService
-      .getGifByTag(action.tag)
-      .subscribe((response: GIFData) => {
-        const gifs = response.data.map(gif => gif.images);
-        console.log({ gifs });
-        ctx.setState({ ...state, gifs: gifs });
-      });
   }
 
   private isDuplicateTag(name: string, tags: Tag[]): boolean{

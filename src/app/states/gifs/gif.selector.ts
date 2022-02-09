@@ -4,7 +4,7 @@ import { GifState, STATE_TYPE } from "./gif.state";
 export class GifSelector {
     @Selector([ GifState ])
     public static getGifs(state: STATE_TYPE) {
-        return state.gifs;
+        return state.gifsList;
     }
 }
 
