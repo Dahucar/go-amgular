@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
-import { AddGif, AddTag, RemoveTagById } from './gif.action';
+import { AddGif, AddTag, GetGifsByTag, RemoveTagById, SetLoading } from './gif.action';
 import { GifsService } from '../../services/gifs.service';
+import { GIFData, Images } from './gif.types';
 
 // Definir el tipo de mi estado (las propiedades y su tipado correspondiente)
-export interface GifsInterface {
-  url: string
-}
-
 export interface Tag {
   id: number,
   name: string,
 }
 
 export interface STATE_TYPE {
-  gifs: GifsInterface[],
+  gifs: Images[],
   tags: Tag[],
   loading: boolean
 }
@@ -37,6 +34,12 @@ export class GifState {
     private gifService: GifsService
   ){}
 
+  @Action(SetLoading)
+  public SetLoading(ctx: StateContext<STATE_TYPE>, action: SetLoading){
+    const state = ctx.getState();
+    ctx.setState({ ...state, loading: action.loading });
+  }
+
   // Definir todas las acciones necesarias.
   @Action(AddTag)
   public addNewTag(ctx: StateContext<STATE_TYPE>, action: AddGif): void {
@@ -55,6 +58,19 @@ export class GifState {
     // buscar el tag por el id y devolver una lista actualizada
     const tagsFitered = state.tags.filter(tag => tag.id !== action.id);
     ctx.setState({ ...state, tags: tagsFitered });
+  }
+
+  @Action(GetGifsByTag)
+  public getGifsByTag(ctx: StateContext<STATE_TYPE>, action: GetGifsByTag){
+    const state = ctx.getState();
+
+    this.gifService
+      .getGifByTag(action.tag)
+      .subscribe((response: GIFData) => {
+        const gifs = response.data.map(gif => gif.images);
+        console.log({ gifs });
+        ctx.setState({ ...state, gifs: gifs });
+      });
   }
 
   private isDuplicateTag(name: string, tags: Tag[]): boolean{

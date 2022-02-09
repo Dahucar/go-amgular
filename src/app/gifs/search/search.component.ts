@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 // Store.
 import { Store, Select } from '@ngxs/store';
-import { AddGif, AddTag } from 'src/app/states/gifs/gif.action';
+import { AddGif, AddTag, GetGifsByTag, SetLoading } from 'src/app/states/gifs/gif.action';
 import { GifSelector } from 'src/app/states/gifs/gif.selector';
 
 @Component({
@@ -22,7 +22,12 @@ export class SearchComponent implements OnInit {
   public findGifByTag(): void {
     let tag = this.inputSearch.nativeElement.value;
     if (tag) {
-      this.store.dispatch([new AddTag(tag)]);
+      this.store.dispatch([
+        new AddTag(tag),
+        new SetLoading(true),
+        new GetGifsByTag(tag),
+        new SetLoading(false)
+      ]);
       this.inputSearch.nativeElement.value = "";
     }
   }
