@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
-import { AddGif, AddTag, GetGifsByTag, RemoveTagById, SetLoading } from './gif.action';
+import { AddGif, AddTag, GetGifsByTag, RemoveTagById, SetLoading, GetLocalGif } from './gif.action';
 import { GifsService } from '../../services/gifs.service';
 import { Gif, GIFData, Images } from './gif.types';
+import { environment } from 'src/environments/environment';
 
 // Definir el tipo de mi estado (las propiedades y su tipado correspondiente)
 export interface Tag {
@@ -44,12 +45,18 @@ export class GifState {
   @Action(AddTag)
   public addNewTag(ctx: StateContext<STATE_TYPE>, action: AddGif): void {
     const state = ctx.getState();
-    let tag: Tag = { id: new Date().getTime(), name: action.name };
+    const tag: Tag = { id: this.generateId(), name: action.name };
+    const tags = [ ...state.tags, tag ];
 
     if (this.inRangeTags(state.tags) && !this.isDuplicateTag(tag.name, state.tags)) {
-      ctx.setState({ ...state, tags: [ ...state.tags, tag ] });
+      this.addTagToLocalStorage(tags)
+      ctx.setState({ ...state, tags });
     }
+  }
 
+  @Action(GetLocalGif)
+  public getLocalGifs(ctx: StateContext<STATE_TYPE>) {
+    ctx.setState({ ...ctx.getState(), tags: this.getTagsFromLocalStorage() });
   }
 
   @Action(RemoveTagById)
@@ -65,6 +72,28 @@ export class GifState {
     this.gifService.getGifByTag(action.tag).subscribe((response: GIFData) => {
       ctx.setState({ ...ctx.getState(), gifsList: response.data });
     });
+  }
+
+  private addTagToLocalStorage(tags: Tag[]){
+    try {
+      localStorage.setItem(environment.tagKey, JSON.stringify(tags))
+    } catch (error) {
+      console.error(error)
+      localStorage.setItem(environment.tagKey, JSON.stringify([]))
+    }
+  }
+
+  private getTagsFromLocalStorage(): Tag[] {
+    try {
+      return JSON.parse(localStorage.getItem(environment.tagKey) || "") || [];
+    } catch (error) {
+      localStorage.setItem(environment.tagKey, '')
+      return [];
+    }
+  }
+
+  private generateId(){
+    return new Date().getTime();
   }
 
   private isDuplicateTag(name: string, tags: Tag[]): boolean{

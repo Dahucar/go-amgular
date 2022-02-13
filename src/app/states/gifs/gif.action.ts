@@ -13,6 +13,11 @@ export class GetGifsByTag {
   constructor(public tag: string) {}
 }
 
+export class GetLocalGif {
+  static readonly type = '[GIF] Get tags from localStorage';
+  constructor() {}
+}
+
 export class SetLoading {
   static readonly type = '[GIF] Set loading value';
   constructor(public loading: boolean) {}
