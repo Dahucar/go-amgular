@@ -64,6 +64,8 @@ export class GifState {
     const state = ctx.getState();
     // buscar el tag por el id y devolver una lista actualizada
     const tagsFitered = state.tags.filter(tag => tag.id !== action.id);
+    console.log({ tagsFitered })
+    this.addTagToLocalStorage(tagsFitered);
     ctx.setState({ ...state, tags: tagsFitered });
   }
 
@@ -76,7 +78,7 @@ export class GifState {
 
   private addTagToLocalStorage(tags: Tag[]){
     try {
-      localStorage.setItem(environment.tagKey, JSON.stringify(tags))
+      localStorage.setItem(environment.tagKey, JSON.stringify(tags || ""))
     } catch (error) {
       console.error(error)
       localStorage.setItem(environment.tagKey, JSON.stringify([]))
