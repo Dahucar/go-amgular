@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { AddGif, AddTag, GetGifsByTag, RemoveTagById, SetLoading } from './gif.action';
 import { GifsService } from '../../services/gifs.service';
-import { GIFData, Images } from './gif.types';
+import { Gif, GIFData, Images } from './gif.types';
 
 // Definir el tipo de mi estado (las propiedades y su tipado correspondiente)
 export interface Tag {
@@ -11,7 +11,7 @@ export interface Tag {
 }
 
 export interface STATE_TYPE {
-  gifsList: Images[],
+  gifsList: Gif[],
   tags: Tag[],
   loading: boolean
 }
@@ -62,12 +62,9 @@ export class GifState {
 
   @Action(GetGifsByTag)
   public getGifsByTag(ctx: StateContext<STATE_TYPE>, action: GetGifsByTag){
-    const callService = () => this.gifService.getGifByTag(action.tag);
-    return callService().subscribe((response: GIFData) => {
-      const gifsList = response.data.map(g => g.images);
-      ctx.setState({ ...ctx.getState(), gifsList })
+    this.gifService.getGifByTag(action.tag).subscribe((response: GIFData) => {
+      ctx.setState({ ...ctx.getState(), gifsList: response.data });
     });
-
   }
 
   private isDuplicateTag(name: string, tags: Tag[]): boolean{

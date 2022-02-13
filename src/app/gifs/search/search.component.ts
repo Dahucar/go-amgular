@@ -24,9 +24,7 @@ export class SearchComponent implements OnInit {
     if (tag) {
       this.store.dispatch([
         new AddTag(tag),
-        new SetLoading(true),
         new GetGifsByTag(tag),
-        new SetLoading(false)
       ]);
       this.inputSearch.nativeElement.value = "";
     }
