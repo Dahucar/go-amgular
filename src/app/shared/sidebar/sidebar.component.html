@@ -3,7 +3,7 @@
     <hr class="text-white">
     <div class="list-group" *ngIf="tags.length !== 0; else noTags">
         <div class="list-reset" *ngFor="let tag of tags">
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="#" (click)="selectTag(tag.name)" class="list-group-item list-group-item-action">
                 <input class="form-check-input me-1" type="checkbox" (click)="deleteTag(tag.id)">
                 {{ tag.name | titlecase }}
             </a>

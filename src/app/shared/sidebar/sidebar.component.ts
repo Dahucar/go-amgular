@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { RemoveTagById } from 'src/app/states/gifs/gif.action';
+import { GetGifsByTag, RemoveTagById } from 'src/app/states/gifs/gif.action';
 import { TagSelector } from 'src/app/states/gifs/gif.selector';
 import { Tag } from 'src/app/states/gifs/gif.state';
 
@@ -23,6 +23,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next(SidebarComponent);
     this.ngUnsubscribe.complete();
+  }
+
+  public selectTag(tagName: string) {
+    this.store.dispatch([ new GetGifsByTag(tagName) ]);
   }
 
   public deleteTag(tagId: number): void {
