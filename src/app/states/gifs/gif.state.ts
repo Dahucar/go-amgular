@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
-import { AddGif, AddTag, GetGifsByTag, RemoveTagById, SetLoading, GetLocalGif } from './gif.action';
+import { AddGif, AddTag, GetGifsByTag, RemoveTagById, SetLoading, GetLocalGif, GetLastSearchGif } from './gif.action';
 import { GifsService } from '../../services/gifs.service';
 import { Gif, GIFData, Images } from './gif.types';
 import { environment } from 'src/environments/environment';
@@ -69,6 +69,16 @@ export class GifState {
     ctx.setState({ ...state, tags: tagsFitered });
   }
 
+  @Action(GetLastSearchGif)
+  public getLastSearchGif(ctx: StateContext<STATE_TYPE>){
+    const { tags } = ctx.getState();
+    if (tags.length !== 0) {
+      this.gifService.getGifByTag(tags[tags.length - 1].name).subscribe((response: GIFData) => {
+        ctx.setState({ ...ctx.getState(), gifsList: response.data });
+      });
+    }
+  }
+
   @Action(GetGifsByTag)
   public getGifsByTag(ctx: StateContext<STATE_TYPE>, action: GetGifsByTag){
     this.gifService.getGifByTag(action.tag).subscribe((response: GIFData) => {
@@ -99,7 +109,6 @@ export class GifState {
   }
 
   private isDuplicateTag(name: string, tags: Tag[]): boolean{
-    console.log("execute isDuplicateTag!");
     const isExist = tags.find(
       tag => tag.name.toLowerCase() === name.toLowerCase()
     );
@@ -107,7 +116,6 @@ export class GifState {
   }
 
   private inRangeTags(tags: Tag[]){
-    console.log("execute inRangeTags!");
     return tags.length < 10;
   }
 

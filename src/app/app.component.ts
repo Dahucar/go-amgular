@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { GetLocalGif, SetLoading } from './states/gifs/gif.action';
+import { GetLastSearchGif, GetLocalGif } from './states/gifs/gif.action';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,9 @@ export class AppComponent implements OnInit{
   constructor(private _state: Store){}
 
   ngOnInit(): void {
-    this._state.dispatch([ new GetLocalGif() ]);
+    this._state.dispatch([
+      new GetLocalGif(),
+      new GetLastSearchGif()
+    ]);
   }
 }

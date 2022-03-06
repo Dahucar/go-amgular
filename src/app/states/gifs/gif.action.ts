@@ -32,3 +32,8 @@ export class UpdateLoading {
   static readonly type = '[GIF] Update Loading Gif';
   constructor(public loading: boolean) {}
 }
+
+export class GetLastSearchGif {
+  static readonly type = '[GIF] get last search gif';
+  constructor() {}
+}
