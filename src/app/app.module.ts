@@ -3,12 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
+// Custom Modules.
+import { CountriesModule } from './countries/countries.module';
+import { SharedModule } from './shared/shared.module';
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    CountriesModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
