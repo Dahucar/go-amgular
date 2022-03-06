@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 // Custom Modules.
 import { CountriesModule } from './countries/countries.module';
 import { SharedModule } from './shared/shared.module';
+import { AppRouting } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    AppRouting,
     CountriesModule,
     SharedModule
   ],
