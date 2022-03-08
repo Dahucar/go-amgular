@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CountriesService } from '../../services/countries.service';
 
 @Component({
   selector: 'app-country',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountryComponent implements OnInit {
 
-  constructor() { }
+  public termino: string = "";
+  constructor(private _countriesService: CountriesService) { }
 
   ngOnInit(): void {
+  }
+
+  public startSearch(): void {
+    console.log(this.termino);
+    this._countriesService.searCountryByName(this.termino)
+      .subscribe(resp => console.log("resp: ", resp));
   }
 
 }

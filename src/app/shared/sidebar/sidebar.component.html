@@ -1,1 +1,25 @@
-<p>sidebar works!</p>
+<h2>Busquedas.</h2>
+<hr>
+<ul class="list-group">
+  <li 
+    class="list-group-item pointer"
+    [routerLink]="['/countries']"
+    routerLinkActive="active"
+  >
+    Buscar paises
+  </li>
+  <li
+    class="list-group-item pointer"
+    [routerLink]="['/regions']"
+    routerLinkActive="active"
+  >
+    Buscar regiones
+  </li>
+  <li
+    class="list-group-item pointer"
+    [routerLink]="['/capitals']"
+    routerLinkActive="active"
+  >
+    Buscar capitales
+  </li>
+</ul>

@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.pointer {
+  cursor: pointer !important;
+}
+
+.pointer:hover {
+  background-color: rgba(86, 151, 255, 0.918);
+  transition: 0.5s ease;
+  color: white;
+}
