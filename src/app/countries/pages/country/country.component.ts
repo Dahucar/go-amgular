@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { CountriesService } from '../../services/countries.service';
+import { GetCountry } from '../../../store/country/countries.actions';
 
 @Component({
   selector: 'app-country',
@@ -9,9 +11,15 @@ import { CountriesService } from '../../services/countries.service';
 export class CountryComponent implements OnInit {
 
   public termino: string = "";
-  constructor(private _countriesService: CountriesService) { }
+  constructor(
+    private _countriesService: CountriesService,
+    private _store: Store
+  ) { }
 
   ngOnInit(): void {
+    this._store.dispatch([
+      new GetCountry({ test: 'Es un test' })
+    ]);
   }
 
   public startSearch(): void {
