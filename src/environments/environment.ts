@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  api: "https://restcountries.com/v3.1"
+  api: "https://restcountries.com/v3.1",
+  varibles: {
+    termino: "termino"
+  }
 };
 
 /*
