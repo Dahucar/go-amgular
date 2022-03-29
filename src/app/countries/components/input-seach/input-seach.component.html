@@ -1,0 +1,9 @@
+<form autocomplete="off" (ngSubmit)="startSearch()">
+  <input
+    type="text"
+    class="form-control"
+    [(ngModel)]="termino"
+    [ngModelOptions]="{standalone: true}"
+    placeholder="Ingrese un termino"
+  >
+</form>

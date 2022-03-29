@@ -1,37 +1,3 @@
-<form autocomplete="off" (ngSubmit)="startSearch()">
-  <input
-    type="text"
-    class="form-control"
-    [(ngModel)]="termino"
-    [ngModelOptions]="{standalone: true}"
-    placeholder="Ingrese un termino"
-  >
-</form>
-
+<app-input-seach></app-input-seach>
 <hr>
-
-<table class="table table-hover" *ngIf="countries.length !== 0; else noCountries">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Pais</th>
-      <th scope="col">Poblacion</th>
-      <th scope="col">Bandera</th>
-    </tr>
-  </thead>
-
-  <tbody *ngFor="let country of countries; let i = index;">
-    <tr>
-      <td>{{ i + 1 }}</td>
-      <td>{{ country.name.common }}</td>
-      <td>{{ country.population | number }}</td>
-      <td><img [src]="country.flags.png" [alt]="country.name.common"></td>
-    </tr>
-  </tbody>
-</table>
-
-<ng-template #noCountries>
-  <div class="alert alert-danger">
-    No hay resultados.
-  </div>
-</ng-template>
+<app-by-country [countries]="countries" ></app-by-country>

@@ -9,7 +9,7 @@ export class CountriesService {
   constructor(private _http: HttpClient) { }
 
   public searCountryByName(name: string): Observable<[Country]> {
-    const url: string = `${environment.api}/name/${name}?fullText=true`;
+    const url: string = `${environment.api}/name/${name}?fullText=false`;
     return this._http.get<[Country]>(url);
   }
 
