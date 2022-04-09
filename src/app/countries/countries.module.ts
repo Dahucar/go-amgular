@@ -5,13 +5,17 @@ import { CountryComponent } from './pages/country/country.component';
 import { RegionComponent } from './pages/region/region.component';
 import { CountryDetailComponent } from './pages/country-detail/country-detail.component';
 import { FormsModule } from '@angular/forms';
+import { ByCountryComponent } from './components/by-country/by-country.component';
+import { InputSeachComponent } from './components/input-seach/input-seach.component';
 
 @NgModule({
   declarations: [
     CapitalComponent,
     CountryComponent,
     RegionComponent,
-    CountryDetailComponent
+    CountryDetailComponent,
+    ByCountryComponent,
+    InputSeachComponent
   ],
   exports: [
     CapitalComponent,

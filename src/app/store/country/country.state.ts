@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import { GetCountry, SetNewTermino, GetPrevTermino } from './countries.actions';
 import { CountriesService } from '../../countries/services/countries.service';
-import { Country } from './countries.interfaces';
 import { environment } from '../../../environments/environment';
 import { tap } from 'rxjs/operators';
 
-interface CountriesModelI {
+export interface CountriesModelI {
   termino: String,
   countries: any[]
 }
