@@ -51,10 +51,7 @@ export class CountryState {
   @Action(GetPrevTermino)
   public getPrevTermino(ctx: StateContext<CountriesModelI>) {
     const termino = localStorage.getItem(environment.varibles.termino) || "";
-    return ctx.setState({
-      ...ctx.getState(),
-      termino
-    })
+    this._store.dispatch(new GetCountry(termino));
   }
 
 }

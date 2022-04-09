@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { GetPrevTermino } from './store/country/countries.actions';
+import { GetPrevTermino, GetCountry } from './store/country/countries.actions';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
