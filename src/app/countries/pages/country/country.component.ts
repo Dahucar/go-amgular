@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { CountriesSelectors } from 'src/app/store/country/countries.selectors';
 import { Observable } from 'rxjs';
 import { Country } from 'src/app/store/country/countries.interfaces';
@@ -14,7 +14,7 @@ export class CountryComponent implements OnInit {
   // stream de datos.
   @Select(CountriesSelectors.getCountries)
   private countries$!: Observable<Country[]>;
-  constructor(private _store: Store) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.countries$
