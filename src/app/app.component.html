@@ -1,17 +1,24 @@
 <app-toolbar></app-toolbar>
 
 <div class="content" role="main">
-  <div class="card highlight-card card-small">
-    <app-logo></app-logo>
-    <span>{{ title }}</span>
-  </div>
+  <app-group-container
+    title="Pipes de textos y fechas"
+    [rutes]="dateTextPipesRoutes">
+  </app-group-container>
+  <app-group-container
+    title="Pipes de textos y fechas"
+    [rutes]="dateTextPipesRoutes">
+  </app-group-container>
+  <app-group-container
+    title="Pipes de textos y fechas"
+    [rutes]="dateTextPipesRoutes">
+  </app-group-container>
+  <app-group-container
+    title="Pipes de textos y fechas"
+    [rutes]="dateTextPipesRoutes">
+  </app-group-container>
 
-  <div class="card-container">
-    <app-card [name]="'Date'" [routerLink]="['/date']" path="/date"></app-card>
-    <app-card [name]="'Async'" [routerLink]="['/async']" path="/async">></app-card>
-  </div>
-
-  <div class="card-container">
+  <div class="card-container mt">
     <router-outlet></router-outlet>
   </div>
 

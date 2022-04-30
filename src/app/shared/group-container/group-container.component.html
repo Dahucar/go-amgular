@@ -1,0 +1,13 @@
+<div class="card highlight-card card-small">
+  <app-logo></app-logo>
+  <span>{{ title }}</span>
+</div>
+
+<div class="card-container" *ngIf="rutes.length !== 0" >
+  <div *ngFor="let rute of rutes">
+    <app-card
+      [name]="rute.name"
+      [path]="rute.path">
+    </app-card>
+  </div>
+</div>

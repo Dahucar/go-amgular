@@ -5,13 +5,15 @@ import { FooterComponent } from './footer/footer.component';
 import { CardComponent } from './card/card.component';
 import { LogoComponent } from './logo/logo.component';
 import { RouterModule } from '@angular/router';
+import { GroupContainerComponent } from './group-container/group-container.component';
 
 @NgModule({
   declarations: [
     ToolbarComponent,
     FooterComponent,
     CardComponent,
-    LogoComponent
+    LogoComponent,
+    GroupContainerComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { RouterModule } from '@angular/router';
     ToolbarComponent,
     FooterComponent,
     CardComponent,
-    LogoComponent
+    LogoComponent,
+    GroupContainerComponent
   ]
 })
 export class SharedModule { }
