@@ -24,6 +24,10 @@ p {
   margin-top: 10px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .spacer {
   flex: 1;
 }

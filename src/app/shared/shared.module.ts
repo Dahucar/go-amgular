@@ -6,6 +6,7 @@ import { CardComponent } from './card/card.component';
 import { LogoComponent } from './logo/logo.component';
 import { RouterModule } from '@angular/router';
 import { GroupContainerComponent } from './group-container/group-container.component';
+import { OffcanvasComponent } from './offcanvas/offcanvas.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { GroupContainerComponent } from './group-container/group-container.compo
     FooterComponent,
     CardComponent,
     LogoComponent,
-    GroupContainerComponent
+    GroupContainerComponent,
+    OffcanvasComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { GroupContainerComponent } from './group-container/group-container.compo
     FooterComponent,
     CardComponent,
     LogoComponent,
-    GroupContainerComponent
+    GroupContainerComponent,
+    OffcanvasComponent
   ]
 })
 export class SharedModule { }

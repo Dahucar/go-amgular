@@ -1,5 +1,6 @@
-export interface RouteListI {
-  routes: Array<RouteI>
+export interface GroupRotesI {
+  groupTitle: string;
+  routes: Array<RouteI>;
 }
 
 export interface RouteI {
